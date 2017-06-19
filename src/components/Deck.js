@@ -78,7 +78,7 @@ class Deck extends Component {
         }
 
         return this.props.data.map((card, i) => {
-            console.log(i, this.state.index);
+            // console.log(i, this.state.index);
             if(i < this.state.index) { return null; }
             if(i === this.state.index) {
                 return (
@@ -113,7 +113,8 @@ class Deck extends Component {
 const styles = {
     cardStyle: {
         position: 'absolute',
-        width: SCREEN_WIDTH
+        width: SCREEN_WIDTH,
+        borderBottomWidth: 0
     }
 };
 
