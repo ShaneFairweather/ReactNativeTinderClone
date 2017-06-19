@@ -1,7 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import Deck from './src/components/Deck';
 import { Card, Button } from 'react-native-elements';
+
+const SCREEN_WIDTH = Dimensions.get('window').width;
+
 
 const DATA = [
     { id: 1, text: 'Card #1', uri: 'http://imgs.abduzeedo.com/files/paul0v2/unsplash/unsplash-04.jpg' },
@@ -29,8 +32,33 @@ export default class App extends React.Component {
                     icon={{ name: 'code' }}
                     backgroundColor='#333333'
                     title={'View'}
+                    buttonStyle={
+                        {
+                            borderRadius: 0,
+                            marginLeft: 0,
+                            marginRight: 0,
+                            marginBottom: 0,
+                        }
+                    }
                 >
                 </Button>
+            </Card>
+        )
+    }
+
+    renderNoMoreCards() {
+        return (
+            <Card
+                title="No More Cards"
+                style={styles.card}
+            >
+                <Text style={{ marginBottom: 10 }}>
+                    No more content to display
+                </Text>
+                <Button
+                    title="Get More"
+                    backgroundColor="#03A9F4"
+                />
             </Card>
         )
     }
@@ -41,6 +69,7 @@ export default class App extends React.Component {
             <Deck
                     data={DATA}
                     renderCard={this.renderCard}
+                    renderNoMoreCards={this.renderNoMoreCards}
                 />
               </View>
         );
@@ -48,8 +77,11 @@ export default class App extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+    },
+    card: {
+        height: 400
+    }
 });
