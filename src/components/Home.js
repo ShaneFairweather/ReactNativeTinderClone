@@ -17,10 +17,7 @@ class DeckDisplay extends Component {
                 imageStyle={styles.imageStyle}
                 containerStyle={styles.cardStyle}
             >
-                <Text style={{ marginBottom: 10 }}>
-                    {item.text}
-                </Text>
-                <Text style={{ marginBottom: 10 }}>
+                <Text style={styles.cardTitle}>
                     {item.text}
                 </Text>
             </Card>
@@ -52,26 +49,6 @@ class DeckDisplay extends Component {
                     renderCard={this.renderCard}
                     renderNoMoreCards={this.renderNoMoreCards}
                 />
-                <View>
-                    <Icon
-                        reverse
-                        name='clear'
-                        color='white'
-                        size={40}
-                        onPress={() => console.log('hello')}
-                        iconStyle={[styles.buttonStyle, styles.nextButtonStyle]}
-                        containerStyle={[styles.buttonContainerStyle, styles.nextButtonContainerStyle]}
-                    />
-                    <Icon
-                        reverse
-                        name='favorite'
-                        color='white'
-                        size={40}
-                        onPress={() => console.log('hello')}
-                        iconStyle={[styles.buttonStyle, styles.likeButtonStyle]}
-                        containerStyle={[styles.buttonContainerStyle, styles.likeButtonContainerStyle]}
-                    />
-                </View>
             </View>
         );
     }
@@ -83,16 +60,18 @@ const styles = StyleSheet.create({
         backgroundColor: '#edecf5',
     },
     cardStyle: {
-        marginTop: 63,
-        marginLeft: 0,
-        marginRight: 0,
+        marginTop: 73,
+        marginLeft: 10,
+        marginRight: 10,
         marginBottom: 0,
-        height: 480,
+        height: 490,
         borderBottomWidth: 0,
         shadowOpacity: 0,
+        borderRadius: 30,
     },
     imageStyle: {
-        height: 400,
+        height: 490,
+        borderRadius: 30,
     },
     buttonStyle: {},
     buttonContainerStyle: {
@@ -113,6 +92,9 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: 80,
         bottom: 0,
+    },
+    cardTitle: {
+        fontSize: 28
     }
 });
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Animated, PanResponder, Dimensions } from 'react-native';
+import { Icon } from 'react-native-elements';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SWIPE_THRESHOLD = 0.25 * SCREEN_WIDTH;
@@ -61,7 +62,7 @@ class Deck extends Component {
     getCardStyle() {
         const { position } = this.state;
         const rotate = position.x.interpolate({
-            inputRange: [-SCREEN_WIDTH * 2, 0, SCREEN_WIDTH * 2],
+            inputRange: [-SCREEN_WIDTH * 5, 0, SCREEN_WIDTH * 5],
             outputRange: ['-120deg', '0deg', '120deg']
         });
 
@@ -105,6 +106,26 @@ class Deck extends Component {
         return (
             <View>
                 {this.renderCards()}
+                <View>
+                    <Icon
+                        reverse
+                        name='clear'
+                        color='white'
+                        size={34}
+                        onPress={() => this.forceSwipe('left')}
+                        iconStyle={[styles.buttonStyle, styles.nextButtonStyle]}
+                        containerStyle={[styles.buttonContainerStyle, styles.nextButtonContainerStyle]}
+                    />
+                    <Icon
+                        reverse
+                        name='favorite'
+                        color='white'
+                        size={34}
+                        onPress={() => this.forceSwipe('right')}
+                        iconStyle={[styles.buttonStyle, styles.likeButtonStyle]}
+                        containerStyle={[styles.buttonContainerStyle, styles.likeButtonContainerStyle]}
+                    />
+                </View>
             </View>
         )
     }
@@ -115,6 +136,26 @@ const styles = {
         position: 'absolute',
         width: SCREEN_WIDTH,
         borderBottomWidth: 0
+    },
+    buttonStyle: {},
+    buttonContainerStyle: {
+        top: 570,
+    },
+    likeButtonStyle: {
+        color: '#f54e52'
+    },
+    nextButtonStyle: {
+        color: '#4469f5'
+    },
+    likeButtonContainerStyle: {
+        position: 'absolute',
+        right: 80,
+        bottom: 0,
+    },
+    nextButtonContainerStyle: {
+        position: 'absolute',
+        left: 80,
+        bottom: 0,
     }
 };
 

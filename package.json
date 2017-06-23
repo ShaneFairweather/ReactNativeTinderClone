@@ -21,8 +21,15 @@
   },
   "dependencies": {
     "expo": "^17.0.0",
+    "immutable": "^3.8.1",
     "react": "16.0.0-alpha.6",
     "react-native": "^0.44.0",
-    "react-native-elements": "^0.13.0"
+    "react-native-elements": "^0.13.0",
+    "react-native-router-flux": "^3.40.1",
+    "react-redux": "^5.0.5",
+    "redux": "^3.7.0",
+    "redux-immutable": "^4.0.0",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0"
   }
 }

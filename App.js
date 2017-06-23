@@ -1,33 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import Deck from './src/components/Deck';
+import Router from './src/router';
 import { Card, Button } from 'react-native-elements';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import reducers from './src/reducers'
+import logger from 'redux-logger';
+import DATA from './src/reducers/sampleDeck'
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
+const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-
-const DATA = [
-    { id: 1, text: 'Card #1', uri: 'http://imgs.abduzeedo.com/files/paul0v2/unsplash/unsplash-04.jpg' },
-    { id: 2, text: 'Card #2', uri: 'http://www.fluxdigital.co/wp-content/uploads/2015/04/Unsplash.jpg' },
-    { id: 3, text: 'Card #3', uri: 'http://imgs.abduzeedo.com/files/paul0v2/unsplash/unsplash-09.jpg' },
-    { id: 4, text: 'Card #4', uri: 'http://imgs.abduzeedo.com/files/paul0v2/unsplash/unsplash-01.jpg' },
-    { id: 5, text: 'Card #5', uri: 'http://imgs.abduzeedo.com/files/paul0v2/unsplash/unsplash-04.jpg' },
-    { id: 6, text: 'Card #6', uri: 'http://www.fluxdigital.co/wp-content/uploads/2015/04/Unsplash.jpg' },
-    { id: 7, text: 'Card #7', uri: 'http://imgs.abduzeedo.com/files/paul0v2/unsplash/unsplash-09.jpg' },
-    { id: 8, text: 'Card #8', uri: 'http://imgs.abduzeedo.com/files/paul0v2/unsplash/unsplash-01.jpg' },
-];
-
-export default class App extends React.Component {
+export default class App extends Component {
     renderCard(item) {
         return (
             <Card
                 key={item.id}
-                title={item.text}
                 image={{ uri: item.uri }}
+                containerStyle={styles.cardStyle}
             >
-                <Text style={{ marginBottom: 10 }}>
-                    Customization
-                </Text>
                 <Button
                     icon={{ name: 'code' }}
                     backgroundColor='#333333'
@@ -64,14 +56,11 @@ export default class App extends React.Component {
     }
 
     render() {
+        const store = createStore(reducers, applyMiddleware(logger));
         return (
-            <View style={styles.container}>
-            <Deck
-                    data={DATA}
-                    renderCard={this.renderCard}
-                    renderNoMoreCards={this.renderNoMoreCards}
-                />
-              </View>
+            <Provider store={store}>
+                <Router/>
+            </Provider>
         );
   }
 }
@@ -81,7 +70,11 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
     },
-    card: {
-        height: 400
+    cardStyle: {
+        flex: 1,
+        marginTop: 20,
+        marginLeft: 0,
+        marginRight: 0,
+        marginBottom: 0,
     }
 });
